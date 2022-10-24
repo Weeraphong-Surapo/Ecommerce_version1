@@ -76,7 +76,7 @@ if (!isset($_SESSION['login'])) {
                         </div>
                         <form action="" method="post">
                             <input type="hidden" name="order_id" value="<?= $row['order_id']; ?>">
-                            <button type="submit" name="cancel_order" class="btn btn-danger col-12">ยกเลิก</button>
+                            <button type="submit" name="cancel_order" class="btn btn-danger col-12" onclick="confirmdelorder(event)">ยกเลิก</button>
                         </form>
                         <?php } ?>
                     </td>
@@ -87,11 +87,11 @@ if (!isset($_SESSION['login'])) {
                             $check_status = mysqli_query($con, "SELECT * FROM tb_user_delivery WHERE order_id = '$_POST[order_id]'");
                             $fetch_status = mysqli_fetch_array($check_status);
                             if ($fetch_status['status'] != 0) {
-                                echo $use->Swal('warning','ไม่สามารถยกเลิกใด้เนื่องจากกำลังจัดส่ง','','my_order.php');
+                                echo $use->Swal('warning','ยกเลิกไม่ใด้เนื่องจากกำลังจัดส่ง','','my_order.php');
                             } else {
                                 $cancel_order = mysqli_query($con, "DELETE FROM tb_user_delivery WHERE order_id = '$_POST[order_id]'");
                                 $del_order = mysqli_query($con, "DELETE FROM tb_order WHERE order_id = '$_POST[order_id]'");
-                                echo $use->Swal('warning','ยกเลิกออเดอร์เรียบร้อย','','my_order.php');
+                                echo $use->Swal('success','ยกเลิกออเดอร์เรียบร้อย','','my_order.php');
                             }
                         }
                 ?>

@@ -90,8 +90,7 @@
                                 <div class="item-content">
                                     <div class="wrap-newletter-footer">
                                         <form action="#" class="frm-newletter" id="frm-newletter">
-                                            <input type="email" class="input-email" name="email" value=""
-                                                placeholder="Enter your email address">
+                                            <input type="email" class="input-email" name="email" value="" placeholder="Enter your email address">
                                             <button class="btn-submit">Subscribe</button>
                                         </form>
                                     </div>
@@ -264,8 +263,7 @@
         </div>
     </footer>
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
     <script src="assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4"></script>
     <script src="assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4"></script>
@@ -276,6 +274,11 @@
     <script src="assets/js/jquery.countdown.min.js"></script>
     <script src="assets/js/jquery.sticky.js"></script>
     <script src="assets/js/functions.js"></script>
+    <script>
+        function confirmdelorder(event) {
+            if (!confirm("คุณต้องการยกเลิกออเดอร์นี้ใช่ไหม?")) event.preventDefault();
+        }
+    </script>
     </body>
 
     </html>
