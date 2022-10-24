@@ -7,6 +7,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
 } else {
     include "../function/connect.php";
     include('function/head.php');
+    include "swal.php";
     include "function/slide.php";
     include "function/navbar.php";
 ?>
@@ -94,7 +95,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
         }
         if (move_uploaded_file($file_loc, $folder . $final_file)) {
             $_SESSION['success'] = "เพิ่มสินค้าเรียบร้อย";
-            echo '<script>window.location="product.php"</script>';
+            echo $use->Swal('success','เพิ่มสินค้าเรียบร้อย','','product.php');
         } else {
 
             echo "Error.Please try again55";

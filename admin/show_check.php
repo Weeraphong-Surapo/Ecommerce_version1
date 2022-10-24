@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 }
 include "../function/connect.php";
+include "swal.php";
 include('function/head.php');
 include "function/slide.php";
 include "function/navbar.php";
@@ -37,18 +38,18 @@ $show_order = mysqli_query($con, "SELECT * FROM tb_order WHERE order_id = '$_GET
                             ?>
                             <tr>
                                 <td><?= $row['product']; ?></td>
-                                <td><?= $row['price']; ?></td>
+                                <td><?= number_format($row['price']); ?></td>
                                 <td><?= $row['qty']; ?></td>
-                                <td><?= $row['delivery']; ?></td>
+                                <td><?= number_format($row['delivery']); ?></td>
                             </tr>
                             <?php } ?>
                             <tr>
-                                <td colspan="4">ค่าส่ง <?= $delivery; ?></td>
+                                <td colspan="4">ค่าส่ง <?= number_format($delivery); ?> บาท</td>
                             </tr>
                             <tr>
                                 <?php $total_all = $total + $delivery; ?>
                                 <td colspan="4">
-                                    <h5 class="text-success">ราคารวม <?= $total_all; ?> บาท </h5>
+                                    <h5 class="text-success">ราคารวม <?= number_format($total_all); ?> บาท </h5>
                                 </td>
                             </tr>
                         </table>
@@ -79,7 +80,7 @@ if (isset($_POST['order_success'])) {
     $result = mysqli_query($con, $sql);
     if ($result) {
         $_SESSION['success'] = "ตรวจสอบเรียบร้อย";
-        echo '<script>window.location="order.php"</script>';
+        echo $use->Swal('success','ตรวจสอบเรียบร้อย','','order.php');
     } else {
         echo "error";
     }

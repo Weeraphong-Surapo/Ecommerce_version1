@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 } else {
     include "function/head.php";
+    include "swal.php";
     include "function/slide.php";
     include "function/navbar.php";
     include "../function/connect.php";
@@ -66,11 +67,11 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
                 $update = mysqli_query($con, "UPDATE `tb_users` SET `email`='$_POST[email]',`tel`='$_POST[tel]',`name`='$_POST[name]',`address`='$_POST[address]',`img`='$newname' WHERE id =  '$_POST[id]'");
                 unlink($old_img);
                 $_SESSION['success'] = "อัพเดตโปรไฟล์เรียบร้อย";
-                echo '<script>window.location="profile.php"</script>';
+                echo $use->Swal('success','อัพเดตโปรไฟล์เรียบร้อย','','profile.php');
             } else {
                 $update = mysqli_query($con, "UPDATE `tb_users` SET `email`='$_POST[email]',`tel`='$_POST[tel]',`name`='$_POST[name]',`address`='$_POST[address]',`img`='$old_img' WHERE id =  '$_POST[id]'");
                 $_SESSION['success'] = "อัพเดตโปรไฟล์เรียบร้อย";
-                echo '<script>window.location="profile.php"</script>';
+                echo $use->Swal('success','อัพเดตโปรไฟล์เรียบร้อย','','profile.php');
             }
         }
         ?>

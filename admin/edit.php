@@ -7,6 +7,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
 } else {
     include "../function/connect.php";
     include('function/head.php');
+    include "swal.php";
     include "function/slide.php";
     include "function/navbar.php";
 ?>
@@ -109,14 +110,14 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
             if ($update) {
                 unlink($old_img);
                 $_SESSION['success'] = "อัพเดตเรียบร้อย";
-                echo '<script>window.location="product.php"</script>';
+                echo $use->Swal('success','อัพเดตเรียบร้อย','','product.php');
             } else {
                 echo "error";
             }
         } else {
             $update = mysqli_query($con, "UPDATE `tb_shop` SET `img` = '$old_img', `name` = '$name', `description` = '$detail', `price` = '$price', `delivery` = '$delivery',`count` = $qty ,`category` = '$category' WHERE `tb_shop`.`id` = $id");
             $_SESSION['success'] = "อัพเดตเรียบร้อย";
-            echo '<script>window.location="product.php"</script>';
+            echo $use->Swal('success','อัพเดตเรียบร้อย','','product.php');
         }
     }
     ?>

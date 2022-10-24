@@ -16,7 +16,7 @@ if (!isset($_SESSION)) {
                 </div>
                 <ul id="ul-login">
                     <li><a href="profile.php">โปรไฟล์</a></li>
-                    <li><a href="logout.php">ออกจากระบบ</a></li>
+                    <li><a href="function/logout.php">ออกจากระบบ</a></li>
                 </ul>
             </li>
 
@@ -49,9 +49,6 @@ if (!isset($_SESSION)) {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="show_category.php">ประเภทสินค้า</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="insert_category.php">เพิ่มประเภทสินค้า</a>
                         </li>
                     </ul>
                 </div>

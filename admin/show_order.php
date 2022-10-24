@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 }
 include "../function/connect.php";
+include "swal.php";
 include('function/head.php');
 include "function/slide.php";
 include "function/navbar.php";
@@ -34,7 +35,7 @@ $fetch = mysqli_fetch_array($result);
                     ?>
                     <tr>
                         <td><?= $row['product']; ?></td>
-                        <td><?= $row['price']; ?></td>
+                        <td><?= number_format($row['price']); ?></td>
                         <td><?= $row['qty']; ?></td>
                         <td><?= $row['delivery']; ?></td>
                     </tr>
@@ -45,7 +46,7 @@ $fetch = mysqli_fetch_array($result);
                     <tr>
                         <?php $total_all = $total + $delivery; ?>
                         <td colspan="4">
-                            <h1>ราคารวม <?= $total_all; ?> บาท</h1>
+                            <h1>ราคารวม <?= number_format($total_all); ?> บาท</h1>
                         </td>
                     </tr>
                 </table>
@@ -59,6 +60,7 @@ $fetch = mysqli_fetch_array($result);
                     value="<?php echo $fetch['status'] == "0" ? 'จัดส่งสินค้า' : ''; ?>"
                     onclick="confirmdelivery(event)">
             </form>
+            <a href="pdf.php?id=<?php echo $fetch['order_id'];?>" target="_blank" class="btn btn-success col-12 mt-2">ออกใบเสร็จ</a>
         </div>
     </div>
 </div>
@@ -70,7 +72,7 @@ if (isset($_POST['order_success'])) {
     $result = mysqli_query($con, $sql);
     if ($result) {
         $_SESSION['success'] = "จัดส่งสินค้าเรียบร้อย";
-        echo '<script>window.location="delivery.php"</script>';
+        echo $use->Swal('success','จัดส่งเรียบร้อย','','delivery.php');
     } else {
         echo "error";
     }

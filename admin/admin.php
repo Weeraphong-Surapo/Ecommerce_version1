@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 } else {
     include "../function/connect.php";
+    include "swal.php";
     include('function/head.php');
     include "function/slide.php";
     include "function/navbar.php";
@@ -53,10 +54,10 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
         </div>
         <?php
             if (isset($_GET['action']) && $_GET['action'] == 'del') {
-                $del = mysqli_query($con, "DELETE FROM tb_user WHERE id = '$_GET[id]' AND lavel = 'admin'");
+                $del = mysqli_query($con, "DELETE FROM tb_users WHERE id = '$_GET[id]' AND lavel = 'admin'");
                 if ($del) {
                     $_SESSION['delete'] = "ลบข้อมูลเรียบร้อย";
-                    echo "<script>window.location='admin.php'</script>";
+                    echo $use->Swal('success','ลบข้อมูลเรียบร้อย','','admin.php');
                 }
             }
             ?>

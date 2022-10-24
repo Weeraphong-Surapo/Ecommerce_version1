@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 } else {
     include "../function/connect.php";
+    include "swal.php";
     include('function/head.php');
     include "function/slide.php";
     include "function/navbar.php";
@@ -37,8 +38,8 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
         if (!$result) {
             echo "error";
         }else{
-            echo '<script>window.location="show_category.php"</script>';
             $_SESSION['success'] = "เพิ่มประเภทสินค้าเรียบร้อย";
+            echo $use->Swal('success','เพิ่มประเภทสินค้าเรียบร้อย','','show_category.php');
         }
     }
     ?>

@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 }
 include "../function/connect.php";
+include "swal.php";
 include('function/head.php');
 include "function/slide.php";
 include "function/navbar.php";
@@ -95,7 +96,7 @@ if (isset($_POST['submitt'])) {
 
         $insert = mysqli_query($con, "INSERT INTO tb_money(money_number,money_img,name) VALUES('$_POST[number_money]','$newname','$_POST[name_money]')");
         $_SESSION['success'] = "เพิ่มบัญชีเรียบร้อย";
-        echo '<script>window.location="money_online.php"</script>';
+        echo $use->Swal('success','เพิ่มบัญชีเรียบร้อย','','money_online.php');
     }
 }
 
@@ -105,7 +106,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'del') {
         echo "error";
     } else {
         $_SESSION['delete'] = "ลบเรียบร้อย";
-        echo '<script>window.location="money_online.php"</script>';
+        echo $use->Swal('success','ลบเรียบร้อย','','money_online.php');
     }
 }
 ?>

@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 } else {
     include "../function/connect.php";
+    include "swal.php";
     include('function/head.php');
     include "function/slide.php";
     include "function/navbar.php";
@@ -29,7 +30,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
                             <th style="text-align: center;">ที่อยู่</th>
                             <th style="text-align: center;">เบอร์โทร</th>
                             <th style="text-align: center;">สินค้าที่สั่ง</th>
-                            <th style="text-align: center;">สถานะ</th>
+                            <th style="text-align: center;">ยกเลิก</th>
                         </tr>
                     </thead>
                     <?php
@@ -49,12 +50,8 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
                         </td>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="id" value="<?= $row['order_id']; ?>">
-                                <input type="hidden" name="status" value="1">
-                                <input name="order_success" type="submit"
-                                    class="<?= $row['status'] == "0" ? 'btn btn-warning' : ''; ?>"
-                                    value="<?php echo $row['status'] == "0" ? 'รอการจัดส่ง' : ''; ?>"
-                                    onclick="confirmdelivery(event)">
+                                <input type="hidden" name="order_id" value="<?= $row['order_id']; ?>">
+                                <input name="cancel_order" type="submit" value="ยกเลิก" class="btn btn-danger" onclick="confirmdelivery(event)">
                             </form>
                             <?php } ?>
                         </td>
@@ -70,17 +67,10 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
                 <?php } ?>
             </div>
             <?php
-                if (isset($_POST['order_success'])) {
-                    $status = $_POST['status'];
-                    $id = $_POST['id'];
-                    $sql = "UPDATE tb_user_delivery SET status = $status WHERE order_id = $id";
-                    $result = mysqli_query($con, $sql);
-                    if ($result) {
-                        $_SESSION['success'] = "จัดส่งสินค้าเรียบร้อย";
-                        echo '<script>window.location="delivery.php"</script>';
-                    } else {
-                        echo "error";
-                    }
+                if (isset($_POST['cancel_order'])) {
+                        $cancel_order = mysqli_query($con, "DELETE FROM tb_user_delivery WHERE order_id = '$_POST[order_id]'");
+                        $del_order = mysqli_query($con, "DELETE FROM tb_order WHERE order_id = '$_POST[order_id]'");
+                        echo $use->Swal('success','ลบเรียบร้อย','','order.php');
                 }
                 ?>
         </div>

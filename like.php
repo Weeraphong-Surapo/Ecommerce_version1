@@ -2,11 +2,12 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+include 'swal.php';
 if (!isset($_SESSION['login'])) {
-    echo "<script>alert('กรุณา login ก่อน')</script>";
-    echo "<script>window.location='login.php'</script>";
+    echo $use->Swal('warning','กรุณา login ก่อน','','login.php');
 } else {
     include "function/connect.php";
+    include 'swal.php';
     if (isset($_POST['add_to_like'])) {
         if (isset($_SESSION['shopping_like'])) {
             $item_arry_id = array_column($_SESSION['shopping_cart'], 'item_id');
@@ -18,11 +19,9 @@ if (!isset($_SESSION['login'])) {
                     'item_img' => $_POST['img'],
                 );
                 $_SESSION['shopping_like'][$count] = $item_arry;
-                echo '<script>alert("เพิ่มสินค้าที่ชอบแล้ว")</scrip>';
-                header('location:like.php');
+                echo $use->Swal('success','เพิ่มสินค้าที่ชอบแล้ว','','like.php');
             } else {
-                echo '<script>alert("มีสินค้านี้ในสิ่งที่ชอบแล้ว")</script>';
-                echo "<script>window.location='like.php'</script>";
+                echo $use->Swal('success','มีสินค้านี้ในสิ่งที่ชอบแล้ว','','like.php');
             }
         } else {
             $item_arry = array(
@@ -32,8 +31,7 @@ if (!isset($_SESSION['login'])) {
             );
             $add_cart = $_SESSION['shopping_like'][0] = $item_arry;
             if ($add_cart) {
-                echo '<script>alert("เพิ่มสินค้าที่ชอบแล้ว")</script>';
-                echo '<script>window.location="like.php"</script>';
+                echo $use->Swal('success','เพิ่มสินค้าที่ชอบแล้ว','','like.php');
             }
         }
     }

@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 }
 include "function/head.php";
+include "swal.php";
 include "function/slide.php";
 include "function/navbar.php";
 include "../function/connect.php";
@@ -70,7 +71,7 @@ if (isset($_POST['submit'])) {
     } else {
         $update = mysqli_query($con, "UPDATE `tb_money` SET `money_number`='$_POST[money_number]',`money_img`='$old_img',name='$_POST[name_money]' WHERE id ='$_POST[id]'");
         $_SESSION['success'] = "อัพเดตเรียบร้อย";
-        echo '<script>window.location="money_online.php"</script>';
+        echo $use->Swal('success','อัพเดตเรียบร้อย','','money_online.php');
     }
 }
 ?>

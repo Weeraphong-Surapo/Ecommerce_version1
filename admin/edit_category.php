@@ -7,6 +7,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 } else {
     include "../function/connect.php";
+    include "swal.php";
     include('function/head.php');
     include "function/slide.php";
     include "function/navbar.php";
@@ -36,7 +37,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
             $update = mysqli_query($con, "UPDATE `tb_category` SET `category_name`='$name' WHERE id = '$_POST[id]'");
             if ($update) {
                 $_SESSION['success'] = "อัพเดตเรียบร้อย";
-                echo '<script>window.location="show_category.php"</script>';
+                echo $use->Swal('success','อัพเดตเรียบร้อย','','show_category.php');
             } else {
                 echo "error";
             }

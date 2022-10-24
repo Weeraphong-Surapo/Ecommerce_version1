@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 } else {
     include "function/head.php";
+    include "swal.php";
     include "function/slide.php";
     include "function/navbar.php";
     include "../function/connect.php";
@@ -48,7 +49,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
                             ?>
                         <tr>
                             <td><?= $i++;; ?></td>
-                            <td><img src="../<?= $row['img']; ?>" width="150px" height="120px"></td>
+                            <td width="13%"><img src="../<?= $row['img']; ?>" width="150px" height="120px"></td>
                             <td><?= $row['name']; ?></td>
                             <td><?= strlen($row['description']) < 20 ? $row['description']: mb_substr($row['description'], 0, 20).'...'; ?>
                             </td>
@@ -81,7 +82,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
         $result = mysqli_query($con, "DELETE FROM tb_shop WHERE id = '$_GET[id]'");
         if ($result) {
             $_SESSION['success'] = "ลบสินค้าเรียบร้อย";
-            echo '<script>window.location="product.php"</script>';
+            echo $use->Swal('success','ลบสินค้าเรียบร้อย','','product.php');
         }
     }
     ?>

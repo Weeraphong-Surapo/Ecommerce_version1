@@ -6,6 +6,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
     echo '<script>window.location="../index.php"</script>';
 } else {
     include "../function/connect.php";
+    include "swal.php";
     include('function/head.php');
     include "function/slide.php";
     include "function/navbar.php"; ?>
@@ -80,7 +81,7 @@ if (isset($_SESSION['login']) && $_SESSION['username'] != 'admin') {
             }
             if (move_uploaded_file($file_loc, $folder . $final_file)) {
                 $_SESSION['success'] = "เพิ่มผู้ดูแลเรียบร้อย";
-                echo '<script>window.location="admin.php"</script>';
+                echo $use->Swal('success','เพิ่มผู้ดูแลเรียบร้อย','','admin.php');
             } else {
                 echo "Error.Please try again55";
             }

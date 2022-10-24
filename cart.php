@@ -2,9 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+include 'swal.php'; 
 if (!isset($_SESSION['login'])) {
-    echo "<script>alert('กรุณา login ก่อน')</script>";
-    echo "<script>window.location='login.php'</script>";
+    echo $use->Swal('warning','กรุณา login ก่อน','','login.php');
 } else {
     include "function/connect.php";
 
@@ -28,11 +28,9 @@ if (!isset($_SESSION['login'])) {
                     'item_quantity' => $_POST['qty']
                 );
                 $_SESSION['shopping_cart'][$count] = $item_arry;
-                echo '<script>alert("เพิ่มสินค้าลงในตะกร้าแล้ว")</scrip>';
-                header('location:cart.php');
+                echo $use->Swal('success','เพิ่มสินค้าลงในตะกร้าแล้ว','','cart.php');
             } else {
-                echo '<script>alert("มีสินค้านี้ในตะกร้าแล้ว")</script>';
-                echo "<script>window.location='index.php'</script>";
+                echo $use->Swal('success','มีสินค้านี้ในตะกร้าแล้ว','','cart.php');
             }
         } else {
             $item_arry = array(
@@ -45,8 +43,7 @@ if (!isset($_SESSION['login'])) {
             );
             $add_cart = $_SESSION['shopping_cart'][0] = $item_arry;
             if ($add_cart) {
-                echo '<script>alert("เพิ่มสินค้าลงในตะกร้าแล้ว")</script>';
-                echo '<script>window.location="cart.php"</script>';
+                echo $use->Swal('success','เพิ่มสินค้าลงในตะกร้าแล้ว','','cart.php');
             }
         }
     }
@@ -56,12 +53,15 @@ if (isset($_GET['action'])) {
         foreach ($_SESSION['shopping_cart'] as $keys => $values) {
             if ($values['item_id'] == $_GET['id']) {
                 unset($_SESSION['shopping_cart'][$keys]);
+                
             }
         }
     }
 }
 ?>
-<?php include "function/header.php"; ?>
+<?php 
+    include "function/header.php";
+?>
 
 <!--main area-->
 <main id="main" class="main-site">

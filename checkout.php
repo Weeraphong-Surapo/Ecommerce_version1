@@ -3,6 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 include "function/connect.php";
+include 'swal.php'; 
 include "function/header.php"; ?>
 
 <!--main area-->
@@ -140,7 +141,7 @@ include "function/header.php"; ?>
 <?php
 if (isset($_POST['check_out'])) {
     if ($_POST['check'] == '' and $_POST['check_online'] == '') {
-        echo '<script>alert("เลือกการชำระเงิน")</script>';
+        echo $use->Swal('warning','เลือกการชำระเงิน','','checkout.php');
     } else {
         if (isset($_POST['check']) && $_POST['check'] == "cod") {
 
