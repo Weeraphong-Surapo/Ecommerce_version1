@@ -7,7 +7,6 @@ if (!isset($_SESSION['login'])) {
     echo $use->Swal('warning','กรุณา login ก่อน','','login.php');
 } else {
     include "function/connect.php";
-    include 'swal.php';
     if (isset($_POST['add_to_like'])) {
         if (isset($_SESSION['shopping_like'])) {
             $item_arry_id = array_column($_SESSION['shopping_cart'], 'item_id');
