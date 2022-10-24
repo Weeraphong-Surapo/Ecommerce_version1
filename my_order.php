@@ -2,9 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+include "swal.php";
 if (!isset($_SESSION['login'])) {
-    echo "<script>alert('กรุณา login ก่อน')</script>";
-    echo "<script>window.location='login.php'</script>";
+    echo $use->Swal('warning','กรุณา login ก่อน','','login.php');
 } else {
     include "function/connect.php";
     include "function/header.php";
@@ -87,12 +87,11 @@ if (!isset($_SESSION['login'])) {
                             $check_status = mysqli_query($con, "SELECT * FROM tb_user_delivery WHERE order_id = '$_POST[order_id]'");
                             $fetch_status = mysqli_fetch_array($check_status);
                             if ($fetch_status['status'] != 0) {
-                                echo "<script>alert('ไม่สามารถยกเลิกใด้เนื่องจากกำลังจัดส่ง')</script>";
+                                echo $use->Swal('warning','ไม่สามารถยกเลิกใด้เนื่องจากกำลังจัดส่ง','','my_order.php');
                             } else {
                                 $cancel_order = mysqli_query($con, "DELETE FROM tb_user_delivery WHERE order_id = '$_POST[order_id]'");
                                 $del_order = mysqli_query($con, "DELETE FROM tb_order WHERE order_id = '$_POST[order_id]'");
-                                echo '<script>alert("ยกเลิกออเดอร์เรียบร้อย")</script>';
-                                echo '<script>window.location="my_order.php"</script>';
+                                echo $use->Swal('warning','ยกเลิกออเดอร์เรียบร้อย','','my_order.php');
                             }
                         }
                 ?>
