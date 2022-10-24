@@ -25,6 +25,7 @@
     <!-- End layout styles -->
     <!-- CSS only -->
 
+    
     <link rel="shortcut icon" href="./assets/images/favicon.png" />
     <style>
     tr td img {
