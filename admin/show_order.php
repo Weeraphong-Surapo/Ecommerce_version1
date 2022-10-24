@@ -43,7 +43,7 @@ $fetch = mysqli_fetch_array($result);
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <h3 class="text-center">ออเดอร์ที่ต้องส่ง</h3>
+            <h3 class="text-center" style="text-align: center; font-size:28;">รายการสินค้า</h3>
             <div class="table-responsive table-hover" >
                 <table class="text-center table " id="customers" style="width: 100%;" >
                     <tr class="bg-primary text-white">
